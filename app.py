@@ -5,7 +5,7 @@ from PIL import Image
 from torchvision import models, transforms
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = "Quantization/quantized_efficientnet.pth"
+MODEL_PATH = "quantized_efficientnet.pth"
 
 # Hardcoded class names for trash classification
 class_names = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash', 'compost']
