@@ -31,22 +31,12 @@ jobs:
       run: |
         python -m pytest tests/ -v || echo "No tests found"
     
-    # Uncomment the section below if deploying to Hugging Face Spaces
-    # - name: Deploy to Hugging Face Spaces
-    #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    #   env:
-    #     HF_TOKEN: ${{ secrets.HF_TOKEN }}
-    #   run: |
-    #     git config --global user.email "action@github.com"
-    #     git config --global user.name "GitHub Action"
-    #     git remote add hf https://huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE_NAME
-    #     git push hf main
-
-    # Uncomment the section below if deploying to Azure
-    # - name: Deploy to Azure
-    #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    #   uses: azure/webapps-deploy@v2
-    #   with:
-    #     app-name: your-app-name
-    #     publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-    #     package: .
+    - name: Deploy to Hugging Face Spaces
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git remote add hf https://user:${HF_TOKEN}@huggingface.co/spaces/samuel-123-45/Quantization
+        git push -u hf main --force
